@@ -8,11 +8,15 @@ export default function TicketForm(){
     const [description, setDescription]  = useState("");
     const [priority, setPriority] = useState("1");
 
-    const priorityLables = {
+
+    const priorityLabels = {
         1: "Low",
         2: "Medium",
         3: "High"
     }
+
+
+  
 
     const clearForms = ()=>{
         setTitle("");
@@ -44,6 +48,24 @@ export default function TicketForm(){
         className="form-input" 
         onChange={e => setDescription(e.target.value)}></textarea>
         </div>
+
+        <fieldset >
+            <legend>Priority</legend>
+            {
+                Object.entries(priorityLabels).map(([value, label])=>( 
+                    <label key={value} className="priority-label">
+                        <input type="radio" 
+                        value={value} 
+                        checked={priority === value} 
+                        className="priority-input"
+                        onChange={(e) => setPriority(e.target.value)}></input>
+                        {label}
+                    </label>
+                ))
+            }
+        </fieldset>
+
+        <button type="submit" className="button">Submit</button>
     </form>
     )
 }
